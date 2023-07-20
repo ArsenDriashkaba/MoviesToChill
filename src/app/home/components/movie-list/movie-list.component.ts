@@ -8,6 +8,6 @@ import { Observable } from 'rxjs';
   templateUrl: './movie-list.component.html',
 })
 export class MovieListComponent {
-  movies: Observable<Movie[]> = this.moviesService.getMovies();
+  movies$: Observable<Movie[]> = this.moviesService.getMovies();
   constructor(private readonly moviesService: MoviesService) {}
 }

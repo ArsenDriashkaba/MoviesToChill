@@ -11,12 +11,23 @@ export class MoviesService {
   constructor(private readonly http: HttpClient) {}
 
   getMovies(): Observable<Movie[]> {
-    const { moviesApiBaseUrl, moviesApiKey } = environment;
+    const { moviesApiBaseUrl, moviesApiKey, moviesApiImagesBaseUrl } =
+      environment;
 
     return this.http
       .get<MovieResponse>(
         `${moviesApiBaseUrl}/movie/popular?api_key=${moviesApiKey}`,
       )
-      .pipe(map((data) => data?.results));
+      .pipe(
+        map((data) => data?.results),
+        map((movies) =>
+          movies.map((movie) => {
+            return {
+              ...movie,
+              poster_path: `${moviesApiImagesBaseUrl}/${movie.poster_path}`,
+            };
+          }),
+        ),
+      );
   }
 }

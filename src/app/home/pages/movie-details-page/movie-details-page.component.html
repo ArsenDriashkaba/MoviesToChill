@@ -1,1 +1,9 @@
 <h1>This is a Movie details page!</h1>
+<div
+  *ngIf="movieDetail$ | async as movie"
+  class="flex flex-col items-center justify-evenly gap-5"
+>
+  <h2>{{ movie.title }}</h2>
+  <img class="w-1/3" [src]="movie.backdrop_path" alt="image" />
+  <p class="w-1/3 text-xl">{{ movie.overview }}</p>
+</div>

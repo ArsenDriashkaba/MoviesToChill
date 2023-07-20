@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MovieDetailsPageComponent } from './pages/movie-details-page/movie-details-page.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './services/movies.service';
+import { RouterModule } from '@angular/router';
+import { MovieDetailsService } from './services/movie-details.service';
 
 @NgModule({
   declarations: [
@@ -12,8 +14,8 @@ import { MoviesService } from './services/movies.service';
     MovieDetailsPageComponent,
     MovieListComponent,
   ],
-  imports: [CommonModule, HttpClientModule],
-  providers: [MoviesService],
+  imports: [CommonModule, HttpClientModule, NgOptimizedImage, RouterModule],
+  providers: [MoviesService, MovieDetailsService],
   exports: [HomePageComponent, MovieDetailsPageComponent],
 })
 export class HomeModule {}
