@@ -1,6 +1,19 @@
-<ol class="flex flex-wrap">
+<mat-paginator
+  class="demo-paginator"
+  (page)="handlePageEvent($event)"
+  [pageSize]="pageSize"
+  [disabled]="disabled"
+  [length]="length"
+  [showFirstLastButtons]="showFirstLastButtons"
+  [hidePageSize]="hidePageSize"
+  [pageIndex]="pageIndex"
+  aria-label="Select page"
+>
+</mat-paginator>
+
+<ol class="flex flex-wrap w-full">
   <li
-    class="w-52 p-4 shadow-md m-2 flex transition hover:scale-[1.1] cursor-pointer ease-in-out"
+    class="w-52 p-4 shadow-md m-2 flex transition hover:scale-[1.1] cursor-pointer ease-in-out z-0 hover:z-10"
     *ngFor="let movie of movies$ | async"
   >
     <a
@@ -8,7 +21,7 @@
       routerLink="movies/{{ movie.id }}"
     >
       <img class="w-44" [src]="movie.poster_path" alt="movie_poster" />
-      <p class="text-center">{{ movie.original_title | titlecase }}</p>
+      <p class="text-center">{{ movie.title | titlecase }}</p>
     </a>
   </li>
 </ol>

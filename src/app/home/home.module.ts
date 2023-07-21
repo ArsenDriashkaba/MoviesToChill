@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './services/movies.service';
 import { RouterModule } from '@angular/router';
 import { MovieDetailsService } from './services/movie-details.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,13 @@ import { MovieDetailsService } from './services/movie-details.service';
     MovieDetailsPageComponent,
     MovieListComponent,
   ],
-  imports: [CommonModule, HttpClientModule, NgOptimizedImage, RouterModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    NgOptimizedImage,
+    RouterModule,
+    MatPaginatorModule,
+  ],
   providers: [MoviesService, MovieDetailsService],
   exports: [HomePageComponent, MovieDetailsPageComponent],
 })

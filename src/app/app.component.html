@@ -1,8 +1,13 @@
-<main class="p-4 flex items-center justify-center flex-col">
-  <h1 class="text-2xl text-blue-900">Development is in progress....</h1>
-  <nav class="flex items-center justify-evenly p-6 text-blue-900 w-full">
-    <a routerLink="">Home</a>
-    <a>Profile</a>
+<main
+  class="flex items-center justify-center flex-col bg-gray-100 min-h-screen"
+>
+  <nav class="p-6 bg-blue-950 w-full flex items-center justify-center">
+    <div class="w-2/3 flex items-center gap-5 text-white text-xl">
+      <a routerLink="">Home</a>
+      <a>Profile</a>
+    </div>
   </nav>
-  <router-outlet />
+  <div class="w-2/3 h-fit m-auto relative p-6 bg-white shadow-md">
+    <router-outlet />
+  </div>
 </main>

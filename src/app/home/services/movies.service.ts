@@ -10,13 +10,14 @@ import { Movie, MovieResponse } from '../models/movie';
 export class MoviesService {
   constructor(private readonly http: HttpClient) {}
 
-  getMovies(): Observable<Movie[]> {
+  getMovies(pageIndex?: number): Observable<Movie[]> {
     const { moviesApiBaseUrl, moviesApiKey, moviesApiImagesBaseUrl } =
       environment;
+    const page = pageIndex || 1;
 
     return this.http
       .get<MovieResponse>(
-        `${moviesApiBaseUrl}/movie/popular?api_key=${moviesApiKey}`,
+        `${moviesApiBaseUrl}/movie/popular?api_key=${moviesApiKey}&page=${page}`,
       )
       .pipe(
         map((data) => data?.results),
