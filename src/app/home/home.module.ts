@@ -5,7 +5,6 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './services/movies.service';
 import { RouterModule } from '@angular/router';
-import { MovieDetailsService } from './services/movie-details.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -19,7 +18,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatPaginatorModule,
     MatProgressBarModule,
   ],
-  providers: [MoviesService, MovieDetailsService],
+  providers: [MoviesService],
   exports: [MovieDetailsPageComponent],
 })
 export class HomeModule {}

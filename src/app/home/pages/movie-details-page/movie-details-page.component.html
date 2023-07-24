@@ -1,5 +1,5 @@
 <div
-  *ngIf="movieDetail$ | async as movie"
+  *ngIf="movieDetail as movie; else loading"
   class="flex flex-col justify-evenly gap-5 p-16 text-blue-950"
 >
   <p class="text-3xl">
@@ -29,7 +29,28 @@
         Original language:
         <span class="font-bold">{{ movie.original_language }}</span>
       </p>
+
+      <button
+        class="bg-blue-950 p-3 text-white hover:scale-[1.1] transition ease-in-out"
+        (click)="
+          movieStates.favorite
+            ? handleFavoriteState(false)
+            : handleFavoriteState(true)
+        "
+      >
+        {{
+          movieStates.favorite ? "Remove from favorites" : "Add to favorites"
+        }}
+      </button>
+
+      <p *ngIf="pageEventResult$ | async as result">
+        ! {{ result.status_message }} !
+      </p>
     </div>
   </div>
   <p class="w-2/3 text-xl">{{ movie.overview }}</p>
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="primary" />
+</ng-template>

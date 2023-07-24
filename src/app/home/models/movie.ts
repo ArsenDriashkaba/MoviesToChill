@@ -20,6 +20,19 @@ export interface MoviesResponse {
   results: Movie[];
 }
 
+export interface AddFavouriteResponse {
+  success: boolean;
+  status_code: number;
+  status_message: string;
+}
+
+export interface MovieStates {
+  id: number;
+  favorite: boolean;
+  rated: boolean;
+  watchlist: boolean;
+}
+
 export enum MovieCategory {
   popular = 'popular',
   now_playing = 'now_playing',

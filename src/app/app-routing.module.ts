@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: MovieCategory.top_rated, component: MovieListComponent },
   { path: MovieCategory.now_playing, component: MovieListComponent },
   { path: 'movies/:id', component: MovieDetailsPageComponent },
+  { path: '**', redirectTo: MovieCategory.popular },
 ];
 
 @NgModule({
