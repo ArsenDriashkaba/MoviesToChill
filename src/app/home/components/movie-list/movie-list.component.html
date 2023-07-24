@@ -8,20 +8,26 @@
   [hidePageSize]="hidePageSize"
   [pageIndex]="pageIndex"
   aria-label="Select page"
->
-</mat-paginator>
+/>
 
-<ol class="flex flex-wrap w-full">
+<ol
+  class="flex flex-wrap w-full"
+  *ngIf="movies$ | async as movies; else loading"
+>
   <li
     class="w-52 p-4 shadow-md m-2 flex transition hover:scale-[1.1] cursor-pointer ease-in-out z-0 hover:z-10"
-    *ngFor="let movie of movies$ | async"
+    *ngFor="let movie of movies"
   >
     <a
       class="flex flex-col gap-4 items-center"
-      routerLink="movies/{{ movie.id }}"
+      routerLink="/movies/{{ movie.id }}"
     >
       <img class="w-44" [src]="movie.poster_path" alt="movie_poster" />
       <p class="text-center">{{ movie.title | titlecase }}</p>
     </a>
   </li>
 </ol>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="primary" />
+</ng-template>

@@ -3,7 +3,12 @@
 >
   <nav class="p-6 bg-blue-950 w-full flex items-center justify-center">
     <div class="w-2/3 flex items-center gap-5 text-white text-xl">
-      <a routerLink="">Home</a>
+      <a routerLink="/popular" class="flex items-center justify-center"
+        ><mat-icon fontIcon="home"
+      /></a>
+      <a routerLink="/upcoming" routerLinkActive="underline">Upcoming</a>
+      <a routerLink="/top_rated" routerLinkActive="underline">Top rated</a>
+      <a routerLink="/now_playing" routerLinkActive="underline">Now playing</a>
       <a>Profile</a>
     </div>
   </nav>

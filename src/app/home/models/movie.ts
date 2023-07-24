@@ -15,7 +15,16 @@ export interface Movie {
   adult: boolean;
 }
 
-export interface MovieResponse {
+export interface MoviesResponse {
   page: number;
   results: Movie[];
 }
+
+export enum MovieCategory {
+  popular = 'popular',
+  now_playing = 'now_playing',
+  top_rated = 'top_rated',
+  upcoming = 'upcoming',
+}
+
+export type MoviesType = keyof typeof MovieCategory;
