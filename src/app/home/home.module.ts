@@ -7,9 +7,11 @@ import { MoviesService } from './services/movies.service';
 import { RouterModule } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ActionButtonComponent } from '../shared/action-button/action-button.component';
+import { ChangeFavouriteButtonComponent } from './components/change-favourite-button/change-favourite-button.component';
 
 @NgModule({
-  declarations: [MovieDetailsPageComponent, MovieListComponent],
+  declarations: [MovieDetailsPageComponent, MovieListComponent, ChangeFavouriteButtonComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -17,6 +19,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     RouterModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    ActionButtonComponent,
   ],
   providers: [MoviesService],
   exports: [MovieDetailsPageComponent],

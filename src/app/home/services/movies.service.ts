@@ -22,6 +22,7 @@ import { mappedImagesUrl } from './utils';
   providedIn: 'root',
 })
 export class MoviesService {
+  //TODO: implement Angular Interseptor (token / api key)
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     authorization: `Bearer ${env.moviesApiAccessToken}`,
