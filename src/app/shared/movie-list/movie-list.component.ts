@@ -1,13 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MoviesService } from '../../services/movies.service';
-import { Movie, MovieCategory, MoviesType } from '../../models/movie';
+
 import { Observable, Subscription } from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Movie, MovieCategory, MoviesType } from '../../home/models/movie';
+import { MoviesService } from '../../home/services/movies.service';
+import { CommonModule } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
+  standalone: true,
+  imports: [
+    MatPaginatorModule,
+    CommonModule,
+    RouterModule,
+    MatProgressBarModule,
+  ],
 })
 export class MovieListComponent implements OnInit, OnDestroy {
   private currentPath: MoviesType = MovieCategory.popular;
