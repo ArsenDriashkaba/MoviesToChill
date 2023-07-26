@@ -1,0 +1,23 @@
+<div class="flex items-center justify-center flex-col">
+  <h1>Discover movies my friend!</h1>
+
+  <form
+    class="w-3/4 flex items-center justify-center"
+    [formGroup]="searchForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <span class="p-input-icon-left w-full">
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        class="w-full"
+        id="searchValue"
+        formControlName="searchValue"
+        placeholder="Type the name of your movie..."
+      />
+    </span>
+
+    <p-button label="Search" type="submit" />
+  </form>
+</div>

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, Observable, switchMap, tap } from 'rxjs';
-import { AddFavouriteResponse, MovieStates, Movie } from '../home/models/movie';
+import {
+  AddFavouriteResponse,
+  MovieStates,
+  Movie,
+} from '../shared/models/movie';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from '../home/services/movies.service';
+import { MoviesService } from '../shared/services/movies.service';
 
 @Component({
   selector: 'app-movie-details-page',

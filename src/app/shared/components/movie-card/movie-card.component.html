@@ -1,0 +1,11 @@
+<div
+  class="w-52 p-4 shadow-md flex transition hover:scale-[1.1] cursor-pointer ease-in-out h-full bg-white"
+>
+  <a
+    class="flex flex-col gap-4 items-center h-full"
+    routerLink="/movies/{{ movie.id }}"
+  >
+    <img class="w-44" [src]="movie.poster_path" alt="movie_poster" />
+    <p class="text-center m-0">{{ movie.title | titlecase }}</p>
+  </a>
+</div>

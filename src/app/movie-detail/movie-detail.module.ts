@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MovieDetailsPageComponent } from './movie-details-page.component';
 import { ChangeFavouriteButtonComponent } from './components/change-favourite-button/change-favourite-button.component';
-import { ActionButtonComponent } from '../shared/action-button/action-button.component';
-import { MoviesService } from '../home/services/movies.service';
+import { ActionButtonComponent } from '../shared/components/action-button/action-button.component';
+import { MoviesService } from '../shared/services/movies.service';
 
 @NgModule({
   declarations: [MovieDetailsPageComponent, ChangeFavouriteButtonComponent],

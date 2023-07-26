@@ -3,15 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, tap } from 'rxjs';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import {
-  Movie,
-  MovieCategory,
-  Movies,
-  MoviesType,
-} from '../../home/models/movie';
-import { MoviesService } from '../../home/services/movies.service';
+import { MovieCategory, Movies, MoviesType } from '../../models/movie';
+import { MoviesService } from '../../services/movies.service';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 @Component({
   selector: 'app-movie-list',
@@ -22,6 +18,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     CommonModule,
     RouterModule,
     MatProgressBarModule,
+    MovieCardComponent,
   ],
 })
 export class MovieListComponent implements OnInit, OnDestroy {
