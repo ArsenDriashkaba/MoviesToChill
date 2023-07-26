@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { MovieDetailModule } from './movie-detail/movie-detail.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,8 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule,
     AppRoutingModule,
     HomeModule,
+    MovieDetailModule,
     HttpClientModule,
     MatIconModule,
+    MatMenuModule,
   ],
   bootstrap: [AppComponent],
 })

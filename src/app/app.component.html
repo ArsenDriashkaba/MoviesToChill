@@ -3,13 +3,45 @@
 >
   <nav class="p-6 bg-blue-950 w-full flex items-center justify-center">
     <div class="w-2/3 flex items-center gap-5 text-white text-lg">
-      <a routerLink="/popular" class="flex items-center justify-center"
+      <a routerLink="/popular" class="flex items-center justify-center w-fit"
         ><mat-icon fontIcon="home"
       /></a>
-      <a routerLink="/upcoming" routerLinkActive="underline">Upcoming</a>
-      <a routerLink="/top_rated" routerLinkActive="underline">Top rated</a>
-      <a routerLink="/now_playing" routerLinkActive="underline">Now playing</a>
-      <a>Favourites</a>
+      <button
+        [matMenuTriggerFor]="moviesMenu"
+        class="hover:scale-[1.1] transition ease-in-out"
+      >
+        Movies
+      </button>
+      <button
+        [matMenuTriggerFor]="myMoviesMenu"
+        class="hover:scale-[1.1] transition ease-in-out"
+      >
+        My movies
+      </button>
+
+      <mat-menu #moviesMenu="matMenu">
+        <a mat-menu-item routerLink="/upcoming" routerLinkActive="underline">
+          Upcoming
+        </a>
+        <a mat-menu-item routerLink="/top_rated" routerLinkActive="underline">
+          Top rated
+        </a>
+        <a mat-menu-item routerLink="/now_playing" routerLinkActive="underline">
+          Now playing
+        </a>
+        <a mat-menu-item routerLink="/popular" routerLinkActive="underline">
+          Popular
+        </a>
+      </mat-menu>
+
+      <mat-menu #myMoviesMenu="matMenu">
+        <a mat-menu-item routerLink="/favorites" routerLinkActive="underline">
+          Favorites
+        </a>
+        <a mat-menu-item routerLink="/watchlist" routerLinkActive="underline">
+          WatchList
+        </a>
+      </mat-menu>
     </div>
   </nav>
   <div class="w-2/3 h-fit m-auto relative p-6 bg-white shadow-md">

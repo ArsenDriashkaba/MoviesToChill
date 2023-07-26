@@ -6,8 +6,8 @@ import {
   AddFavouriteResponse,
   MovieStates,
   Movie,
-  MoviesResponse,
   MoviesType,
+  Movies,
 } from '../models/movie';
 import {
   generateAddFavoriteMovieUrl,
@@ -22,7 +22,7 @@ import { mappedImagesUrl } from './utils';
   providedIn: 'root',
 })
 export class MoviesService {
-  //TODO: implement Angular Interseptor (token / api key)
+  //TODO: implement Angular Interceptor (token / api key)
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     authorization: `Bearer ${env.moviesApiAccessToken}`,
@@ -30,16 +30,21 @@ export class MoviesService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getMovies(pageIndex?: number, type?: MoviesType): Observable<Movie[]> {
+  getMovies(pageIndex?: number, type?: MoviesType): Observable<Movies> {
     const page: number = pageIndex || 1;
     const moviesType: MoviesType = type || 'popular';
 
     return this.http
-      .get<MoviesResponse>(generateGetMoviesUrl(moviesType, page), {
+      .get<Movies>(generateGetMoviesUrl(moviesType, page), {
         headers: this.headers,
       })
       .pipe(
-        map((data) => data?.results?.map((movie) => mappedImagesUrl(movie))),
+        map((data) => {
+          return {
+            ...data,
+            results: data?.results?.map((movie) => mappedImagesUrl(movie)),
+          };
+        }),
       );
   }
 
@@ -68,7 +73,7 @@ export class MoviesService {
 
   getFavouriteMovies(): Observable<any> {
     return this.http
-      .get<MoviesResponse>(generateGetFavoriteMoviesUrl(), {
+      .get<Movies>(generateGetFavoriteMoviesUrl(), {
         headers: this.headers,
       })
       .pipe(

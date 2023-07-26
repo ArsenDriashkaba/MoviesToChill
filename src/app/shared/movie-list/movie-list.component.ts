@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Movie, MovieCategory, MoviesType } from '../../home/models/movie';
+import {
+  Movie,
+  MovieCategory,
+  Movies,
+  MoviesType,
+} from '../../home/models/movie';
 import { MoviesService } from '../../home/services/movies.service';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -25,8 +30,8 @@ export class MovieListComponent implements OnInit, OnDestroy {
 
   pageSize: number = 20;
   pageIndex: number = 1;
-  length: number = 1000;
-  movies$: Observable<Movie[]> = new Observable<Movie[]>();
+  length: number = 0;
+  movies$: Observable<Movies> = new Observable<Movies>();
 
   hidePageSize: boolean = false;
   showFirstLastButtons: boolean = true;
@@ -44,10 +49,15 @@ export class MovieListComponent implements OnInit, OnDestroy {
       (segments) => (this.currentPath = segments[0]?.path as MoviesType),
     );
 
-    this.movies$ = this.moviesService.getMovies(
-      this.pageIndex,
-      this.currentPath,
-    );
+    this.movies$ = this.moviesService
+      .getMovies(this.pageIndex, this.currentPath)
+      .pipe(
+        tap(
+          (data) =>
+            (this.length =
+              data.total_results > 2000 ? 2000 : data.total_results),
+        ),
+      );
   }
 
   ngOnDestroy() {

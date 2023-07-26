@@ -15,9 +15,11 @@ export interface Movie {
   adult: boolean;
 }
 
-export interface MoviesResponse {
+export interface Movies {
   page: number;
   results: Movie[];
+  total_pages: number;
+  total_results: number;
 }
 
 export interface AddFavouriteResponse {

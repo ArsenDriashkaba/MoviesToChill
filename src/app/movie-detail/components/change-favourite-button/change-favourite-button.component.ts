@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MovieStates } from '../../models/movie';
+import { MovieStates } from '../../../home/models/movie';
 
 @Component({
   selector: 'app-change-favourite-button',

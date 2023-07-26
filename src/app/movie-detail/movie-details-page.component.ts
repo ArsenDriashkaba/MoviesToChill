@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable, switchMap, tap } from 'rxjs';
-import { AddFavouriteResponse, MovieStates, Movie } from '../../models/movie';
+import { finalize, Observable, switchMap, tap } from 'rxjs';
+import { AddFavouriteResponse, MovieStates, Movie } from '../home/models/movie';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from '../../services/movies.service';
-import { data } from 'autoprefixer';
+import { MoviesService } from '../home/services/movies.service';
 
 @Component({
   selector: 'app-movie-details-page',
@@ -23,11 +22,13 @@ export class MovieDetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.movieDetail$ = this.moviesService
-      .getMovieDetail(this.id)
-      .pipe(filter((data) => !!data));
+    this.changeBtnIsLoading = true;
 
-    this.movieStates$ = this.getMovieAccountStates(this.id);
+    this.movieDetail$ = this.moviesService.getMovieDetail(this.id);
+
+    this.movieStates$ = this.getMovieAccountStates(this.id).pipe(
+      finalize(() => (this.changeBtnIsLoading = false)),
+    );
   }
 
   private getMovieAccountStates(id: number) {
@@ -42,9 +43,7 @@ export class MovieDetailsPageComponent implements OnInit {
       .pipe(
         tap((data) => (this.pageEventResult = data)),
         switchMap((_) => this.getMovieAccountStates(this.id)),
-        tap((_) => (this.changeBtnIsLoading = false)),
+        finalize(() => (this.changeBtnIsLoading = false)),
       );
   }
-
-  protected readonly data = data;
 }

@@ -33,7 +33,7 @@
       <app-change-favourite-button
         [data]="movieStates$ | async"
         (favoriteStateChange)="handleFavoriteState($event)"
-        [isLoading]="changeBtnIsLoading || !data"
+        [isLoading]="changeBtnIsLoading"
       />
     </div>
   </div>
