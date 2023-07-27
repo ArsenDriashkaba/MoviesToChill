@@ -6,10 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MovieDetailModule } from './movie-detail/movie-detail.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { HeadersInterceptor } from './shared/interceptors/headers.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,5 +26,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
+  ],
 })
 export class AppModule {}

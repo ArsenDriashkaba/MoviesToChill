@@ -22,35 +22,25 @@ import { mappedImagesUrl } from './utils';
   providedIn: 'root',
 })
 export class MoviesService {
-  //TODO: implement Angular Interceptor (token / api key)
-  private headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    authorization: `Bearer ${env.moviesApiAccessToken}`,
-  });
-
   constructor(private readonly http: HttpClient) {}
 
   getMovies(pageIndex?: number, type?: MoviesType): Observable<Movies> {
     const page: number = pageIndex || 1;
     const moviesType: MoviesType = type || 'popular';
 
-    return this.http
-      .get<Movies>(generateGetMoviesUrl(moviesType, page), {
-        headers: this.headers,
-      })
-      .pipe(
-        map((data) => {
-          return {
-            ...data,
-            results: data?.results?.map((movie) => mappedImagesUrl(movie)),
-          };
-        }),
-      );
+    return this.http.get<Movies>(generateGetMoviesUrl(moviesType, page)).pipe(
+      map((data) => {
+        return {
+          ...data,
+          results: data?.results?.map((movie) => mappedImagesUrl(movie)),
+        };
+      }),
+    );
   }
 
   getMovieDetail(id: number | null): Observable<Movie> {
     return this.http
-      .get<Movie>(generateGetMovieDetailUrl(id), { headers: this.headers })
+      .get<Movie>(generateGetMovieDetailUrl(id))
       .pipe(map((movie) => mappedImagesUrl(movie)));
   }
 
@@ -58,24 +48,20 @@ export class MoviesService {
     movieId: number,
     state: boolean,
   ): Observable<AddFavouriteResponse> {
-    return this.http.post<AddFavouriteResponse>(
-      generateAddFavoriteMovieUrl(),
-      { media_type: 'movie', media_id: movieId, favorite: state },
-      { headers: this.headers },
-    );
+    return this.http.post<AddFavouriteResponse>(generateAddFavoriteMovieUrl(), {
+      media_type: 'movie',
+      media_id: movieId,
+      favorite: state,
+    });
   }
 
   getMovieAccountStates(id: number): Observable<MovieStates> {
-    return this.http.get<MovieStates>(generateGetMoviesAccountStatesUrl(id), {
-      headers: this.headers,
-    });
+    return this.http.get<MovieStates>(generateGetMoviesAccountStatesUrl(id));
   }
 
   getFavouriteMovies(): Observable<any> {
     return this.http
-      .get<Movies>(generateGetFavoriteMoviesUrl(), {
-        headers: this.headers,
-      })
+      .get<Movies>(generateGetFavoriteMoviesUrl())
       .pipe(
         map((data) => data?.results?.map((movie) => mappedImagesUrl(movie))),
       );
